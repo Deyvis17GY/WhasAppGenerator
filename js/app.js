@@ -2,11 +2,41 @@ const numero = document.querySelector('.numero')
 
 const obtener = document.querySelector('.obtener')
 
-let ulr = 'whatsapp://send?phone=+51'
+const urlMovil = 'whatsapp://send?phone=+51'
+const urlWeb ='https://web.whatsapp.com/send?phone=51';
+// https://web.whatsapp.com/send?phone=51993238940&text=Reservar%20Habitacion%20:%0ANombre%20:%20ss%20sss%0AFecha%20:%2023/03/2021%0AHabitaci%C3%B3n%20:%0AStandard%20Superior
+const celular = ()=>{
+    if (sessionStorage.desktop) return false;
+	else if (localStorage.mobile) return true;
+	var mobile = [
+		'iphone',
+		'ipad',
+		'android',
+		'blackberry',
+		'nokia',
+		'opera mini',
+		'windows mobile',
+		'windows phone',
+		'iemobile'
+	];
+	for (var i in mobile)
+		if (navigator.userAgent.toLowerCase().indexOf(mobile[i].toLowerCase()) > 0)
+			return true;
+	return false;
+
+}
+
 
 obtener.addEventListener('click',(e)=>{
     e.preventDefault()
-    window.open(ulr+numero.value)
+    setTimeout(() => {
+    if (celular()) {
+        			window.open(urlMovil+numero.value);
+        		} else {
+        			window.open(urlWeb+numero.value);
+        		}
+        		
+        	}, 500);
     
 })
 
