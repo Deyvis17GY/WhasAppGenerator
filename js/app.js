@@ -1,9 +1,6 @@
 const numero = document.querySelector('.numero')
- 
-
-
 const obtener = document.querySelector('.obtener')
-
+const indicador = document.querySelector('.indicador')
 const urlMovil = 'whatsapp://send?phone=+51'
 const urlWeb ='https://web.whatsapp.com/send?phone=51';
 // https://web.whatsapp.com/send?phone=51993238940&text=Reservar%20Habitacion%20:%0ANombre%20:%20ss%20sss%0AFecha%20:%2023/03/2021%0AHabitaci%C3%B3n%20:%0AStandard%20Superior
@@ -76,4 +73,9 @@ obtener.addEventListener('click',(e)=>{
 })
 
 
+numero.onkeyup = ()=>{
+     maxlength = numero.getAttribute('maxlength')
+     console.log(maxlength)
+     indicador.innerText = maxlength - numero.value.length
 
+}

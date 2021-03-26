@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.fondo{
+    min-height: 100vh;
+    background: linear-gradient(-5deg,#96c8df 50%,#f1e8e8 50%,#ebebeb 50%,#d8e3e9 100%);
+    
+    /* background: linear-gradient(-5deg 50%,#7da5ce 50%,#f1e8e8 50%,#ebebeb 50%); */
+    
+}
+
+.form-container{
+    margin: auto;
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.form-container h1{
+    color: #79705a;
+}
+.form-container .numero{
+    outline: none;
+    color: #79705a;
+   
+    border: 1px solid #aaa391;
+   
+}
+.form-container .numero::placeholder{
+   color:  #79705a;
+}
+.form-container form input:focus{
+    box-shadow: 4px 4px 15px 0px #51321B;
+}
+.form-container form .indicador{
+    color: #79705a;
+    font-weight: 600;
+}
+.form-container .obtener{
+    border: 2px solid #6283a5;
+    color:#41505f ;
+    font-weight: 700;
+}
+.form-container .obtener:hover{
+    color: #fff;
+    background-color: #015338;
+   
+}

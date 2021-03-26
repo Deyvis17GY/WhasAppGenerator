@@ -10,15 +10,19 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body class="bg-dark">
-    <div class="coantainer col-md-12">
-        <div class="col-md-3 m-auto row vh-100 justify-content-center align-items-center">
+<body >
+    <div class="container col-md-12 fondo">
+       
+        <div class="col-md-6 form-container">
+            <h1>Generador de Números de WhatsApp</h1>
             <form action="" class="col-md-12">
-                <div class="form-group">
-                    
-                    <input type="text" name="numero" id="" class="form-control numero" placeholder="Ingrese Numero">
+                <div class="input-group form-group">
+                    <input type="number" name="numero" id="" class="form-control numero" placeholder="Ingresar Número"  pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==9) return false;" maxlength="9">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text indicador px-4">9</div>
+                    </div>           
                 </div>
-                <button class="btn btn-success btn-block obtener center-block"><i class="fab fa-whatsapp h3 mx-2"></i>Generar WhatsApp</button>
+                <button class="btn btn-block  obtener center-block"><i class="fab fa-whatsapp h5 mx-2"></i>Generar WhatsApp</button>
             </form>
         </div>
     </div>
