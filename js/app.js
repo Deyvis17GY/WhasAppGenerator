@@ -1,9 +1,18 @@
 const numero = document.querySelector('.numero')
 const obtener = document.querySelector('.obtener')
 const indicador = document.querySelector('.indicador')
-const urlMovil = 'whatsapp://send?phone=+51'
-const urlWeb ='https://web.whatsapp.com/send?phone=51';
-// https://web.whatsapp.com/send?phone=51993238940&text=Reservar%20Habitacion%20:%0ANombre%20:%20ss%20sss%0AFecha%20:%2023/03/2021%0AHabitaci%C3%B3n%20:%0AStandard%20Superior
+const urlMovil = 'whatsapp://send?phone=+'
+const urlWeb ='https://web.whatsapp.com/send?phone='
+const pais = document.querySelector('.pais')
+
+let mensaje = ''
+let prefijo = ''
+
+console.log(pais.length)
+
+document.addEventListener('DOMContentLoaded',()=>{
+    cargarPais()
+})
 const celular = ()=>{
     if (sessionStorage.desktop) return false;
 	else if (localStorage.mobile) return true;
@@ -25,21 +34,80 @@ const celular = ()=>{
 
 }
 
+cargarPais = async()=>{
+    await fetch('https://restcountries.eu/rest/v2/region/Americas')
+    .then(response => response.json())
+    .then(res =>{
+            res.forEach(item => {
+               
+                if(item.name=='Chile' || item.name=='Peru'){
+                pais.innerHTML +="<option value="+item.name+">"+item.name+"</option>"
+            }
+            
+            });
+    })
+}
+
+
+
+pais.addEventListener('change',async()=>{
+    let indice = pais.options[pais.selectedIndex]
+    await fetch('https://restcountries.eu/rest/v2/region/Americas')
+    .then(response => response.json())
+    .then(res =>{
+            res.forEach(item => {
+                
+                if(indice.value == item.name){
+                prefijo = item.callingCodes[0] 
+                console.log(prefijo)
+                
+            }
+            
+            });
+    })
+})
+
+
 obtener.addEventListener('click',(e)=>{
     e.preventDefault()
     if(!numero.value.length>0){
+        mensaje = 'Ingresa Número Celular'
         Swal.fire({
             position: 'top-end',
             icon: 'warning',
-            title: 'Debe ingresar un numero valido',
+            title: mensaje,
             showConfirmButton: false,
             timer: 1000
           })
-    }else{
+          numero.focus()
+          return
+    }if(numero.value.length <9){
+        mensaje = 'Tu pais son de 9 digitos'
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1000
+          })
+          return
+    }if(!pais.value){
+        mensaje = 'Ingresa Pais'
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: mensaje,
+            showConfirmButton: false,
+            timer: 1000
+          })
+          pais.focus()
+          return
+    }
+    else {
     Swal.fire({
         title: 'Buscando Numero en WhatsApp',
         html: 'Queda <b></b> milisegundos',
-        timer: 1000,
+        timer: 1500,
         timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading()
@@ -60,15 +128,18 @@ obtener.addEventListener('click',(e)=>{
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
             if (celular()) {
-                window.open(urlMovil+numero.value);
+                window.open(urlMovil+prefijo+numero.value);
             } else {
-                window.open(urlWeb+numero.value);
+                window.open(urlWeb+prefijo+numero.value);
             }
         }
+        resetearFormulario()
+        
       })
    
         		
     }
+   
     
 })
 
@@ -77,5 +148,12 @@ numero.onkeyup = ()=>{
      maxlength = numero.getAttribute('maxlength')
      console.log(maxlength)
      indicador.innerText = maxlength - numero.value.length
-
 }
+
+const resetearFormulario = ()=>{
+    let indice = pais.options[pais.selectedIndex]
+    numero.value = ''
+    indicador.innerText = 9
+    indice.text = 'Selecione Pais'
+}
+
