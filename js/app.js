@@ -5,8 +5,8 @@ const urlMovil = 'whatsapp://send?phone=+'
 const urlWeb ='https://web.whatsapp.com/send?phone='
 const pais = document.querySelector('.pais')
 
-let mensaje = ''
 let prefijo = ''
+let indice = pais.options[pais.selectedIndex]
 
 console.log(pais.length)
 
@@ -43,8 +43,7 @@ cargarPais = async()=>{
                 if(item.name=='Chile' || item.name=='Peru'){
                 pais.innerHTML +="<option value="+item.name+">"+item.name+"</option>"
             }
-            
-            });
+        });
     })
 }
 
@@ -56,50 +55,35 @@ pais.addEventListener('change',async()=>{
     .then(response => response.json())
     .then(res =>{
             res.forEach(item => {
-                
                 if(indice.value == item.name){
                 prefijo = item.callingCodes[0] 
                 console.log(prefijo)
-                
-            }
-            
-            });
+          }
+        });
     })
 })
 
+const alertas = (icono,mensaje) =>{
+  Swal.fire({
+    position: 'top-end',
+    icon: icono,
+    title: mensaje,
+    showConfirmButton: false,
+    timer: 1000
+  })
+  
+}
 
 obtener.addEventListener('click',(e)=>{
     e.preventDefault()
     if(!numero.value.length>0){
-        mensaje = 'Ingresa Número Celular'
-        Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1000
-          })
-          numero.focus()
-          return
+       alertas('warning','Ingresa numero')
+        return
     }if(numero.value.length <9){
-        mensaje = 'Tu pais son de 9 digitos'
-        Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1000
-          })
-          return
+        alertas('warning','Tú pais son 9 digitos')
+        return
     }if(!pais.value){
-        mensaje = 'Ingresa Pais'
-        Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            title: mensaje,
-            showConfirmButton: false,
-            timer: 1000
-          })
+        alertas('warning','Seleciona Pais')
           pais.focus()
           return
     }
@@ -134,13 +118,9 @@ obtener.addEventListener('click',(e)=>{
             }
         }
         resetearFormulario()
-        
-      })
-   
-        		
-    }
-   
-    
+      }) 		
+    } 
+
 })
 
 
@@ -151,9 +131,6 @@ numero.onkeyup = ()=>{
 }
 
 const resetearFormulario = ()=>{
-    let indice = pais.options[pais.selectedIndex]
     numero.value = ''
-    indicador.innerText = 9
-    indice.text = 'Selecione Pais'
+    indicador.innerText = 9  
 }
-
