@@ -89,7 +89,7 @@ obtener.addEventListener('click', (e) => {
     }
     else {
     Swal.fire({
-        title: 'Buscando Numero en WhatsApp',
+        title: 'Buscando Número en WhatsApp',
         html: 'Queda <b></b> milisegundos',
         timer: 1500,
         timerProgressBar: true,
