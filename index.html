@@ -4,22 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icono.webp">
     <title>WhatsApp Contactos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body class="">
-    <div class="coantainer col-md-12">
-        <div class="col-md-6 m-auto row vh-100 align-items-center">
-            <form action="" class="col-md-12">
+<body >
+    <div class=" fondo">
+       
+        <div class="col-md-6 form-container">
+            <h1>Generador de Números de WhatsApp</h1>
+            <form action="" class="col-md-12 formulario">
                 <div class="form-group">
-                    <input type="text" name="numero" id="" class="form-control numero">
+                    <select class="form-control pais">
+                      <option value="0">Selecciona Pais</option>
+                      
+                    </select>
+                  </div>
+                <div class="input-group form-group">
+                    <input type="number" name="numero" id="" class="form-control numero" placeholder="Ingresar Número"  pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==9) return false;" maxlength="9">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text indicador px-4">9</div>
+                    </div>           
                 </div>
-                <button class="btn btn-primary btn-block obtener">Obtener</button>
+                
+                <button class="btn btn-block  obtener center-block"><i class="fab fa-whatsapp h5 mx-2"></i>Generar WhatsApp</button>
             </form>
         </div>
+        <!-- <button class="prueba">Prueba</button> -->
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="js/app.js"></script>
+   
+   
 </body>
 </html>

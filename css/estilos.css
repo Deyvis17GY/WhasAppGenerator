@@ -1,0 +1,69 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.fondo{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(-5deg,#96c8df 50%,#f1e8e8 50%,#ebebeb 50%,#d8e3e9 100%);
+    
+    /* background: linear-gradient(-5deg 50%,#7da5ce 50%,#f1e8e8 50%,#ebebeb 50%); */
+    
+}
+/* TITULO */
+.form-container{
+    margin: auto;
+    width: 90%;
+    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.form-container h1{
+    margin: auto;
+    color: #79705a;
+}
+    /* INPUT NUMERO FORMULARIO CLASES*/
+    .formulario .pais:focus{
+        box-shadow: none;
+        border: none;
+        box-shadow: 0px 4px 10px 0px #cabfb7;
+    }
+    .formulario .numero{
+        outline: none;
+        color: #79705a;
+        
+    }
+    .formulario .numero::placeholder{
+    color:  #79705a;
+    }
+    .formulario input:focus{
+        border: none !important;
+        box-shadow: 0px 4px 10px 0px #cabfb7;
+    }
+    /* INDICADOR DE TAMAÑO */
+    .formulario .indicador{
+        color: #79705a;
+        font-weight: 600;
+        border: none !important;
+        background-color: #ebebeb;
+    }
+    /* BOTON GENERAR */
+    .formulario .obtener{
+        border: 2px solid #6283a5;
+        color:#41505f ;
+        font-weight: 700;
+    }
+    .formulario .obtener:hover{
+        color: #fff;
+        border: 2px solid #015338;
+        background-color: #015338;
+    }
+    .formulario .obtener:focus{
+        box-shadow: none;
+    }
+    .formulario .obtener:active{
+        transform: scale(0.95);
+    }
