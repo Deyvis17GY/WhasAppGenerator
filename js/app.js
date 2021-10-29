@@ -8,7 +8,6 @@ const pais = document.querySelector('.pais')
 let prefijo = ''
 let indice = pais.options[pais.selectedIndex]
 
-console.log(pais.length)
 
 document.addEventListener('DOMContentLoaded',()=>{
     cargarPais()
@@ -35,32 +34,33 @@ const celular = ()=>{
 }
 
 cargarPais = async()=>{
-    await fetch('https://restcountries.eu/rest/v2/region/Americas')
-    .then(response => response.json())
-    .then(res =>{
-            res.forEach(item => {
-               
-                if(item.name=='Chile' || item.name=='Peru'){
-                pais.innerHTML +="<option value="+item.name+">"+item.name+"</option>"
-            }
+    await fetch("api.json")
+      .then((response) => response.json())
+      .then((res) => {
+        res.forEach((item) => {
+          const { name } = item
+          if (name == "Chile" || name == "Peru") {
+            pais.innerHTML +=
+              "<option value=" + name + ">" + name + "</option>";
+          }
         });
-    })
+      });
 }
 
 
 
 pais.addEventListener('change',async()=>{
     let indice = pais.options[pais.selectedIndex]
-    await fetch('https://restcountries.eu/rest/v2/region/Americas')
-    .then(response => response.json())
-    .then(res =>{
-            res.forEach(item => {
-                if(indice.value == item.name){
-                prefijo = item.callingCodes[0] 
-                console.log(prefijo)
+    await fetch("api.json")
+      .then((response) => response.json())
+      .then((res) => {
+        res.forEach((item) => {
+          const { name, callingCodes } = item;
+          if (indice.value == name) {
+            prefijo = callingCodes;
           }
         });
-    })
+      });
 })
 
 const alertas = (icono,mensaje) =>{
@@ -74,7 +74,7 @@ const alertas = (icono,mensaje) =>{
   
 }
 
-obtener.addEventListener('click',(e)=>{
+obtener.addEventListener('click', (e) => {
     e.preventDefault()
     if(!numero.value.length>0){
        alertas('warning','Ingresa numero')
@@ -114,6 +114,7 @@ obtener.addEventListener('click',(e)=>{
             if (celular()) {
                 window.open(urlMovil+prefijo+numero.value);
             } else {
+              
                 window.open(urlWeb+prefijo+numero.value);
             }
         }
@@ -123,10 +124,8 @@ obtener.addEventListener('click',(e)=>{
 
 })
 
-
 numero.onkeyup = ()=>{
      maxlength = numero.getAttribute('maxlength')
-     console.log(maxlength)
      indicador.innerText = maxlength - numero.value.length
 }
 
